@@ -1,0 +1,27 @@
+Dependencies :
+1. Python
+2. Python Libraries : flask, pandas, numpy
+
+Installation :
+1. Install Python
+2. Install Pip(python package manager)
+3. Install libraries :
+	command = "pip install flask pandas numpy"
+
+Cara Pakai :
+1. Buka folder dari terminal
+2. Ketik command "python main.py"
+3. Buka aplikasi di browser : "127.0.0.1:5000/home"
+
+Halaman yang udah dibuat :
+- Halaman User :
+Homepage --- Log in
+	   --- Register
+	   --- Search Buku --- Hasil Pencarian --- Halaman Buku
+
+- Halaman Admin :
+Log in --- Homepage  
+           --- Input Buku
+           --- Search Buku --- Hasil Pencarian --- Halaman Buku
+
+
