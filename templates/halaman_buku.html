@@ -19,9 +19,8 @@
           <b>Go Library</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="#">Peminjaman</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="#">Pengembalian</a> </li>
-          <li class="nav-item shadow-none"> <a class="nav-link" href="#">About</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/pengembalian/">Pengembalian</a> </li>
+          <li class="nav-item shadow-none"> <a class="nav-link" href="/about/">About</a> </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/">Log Out</a> </li>
@@ -35,14 +34,17 @@
         <div class="col-md-12 text-center">
           <h1 class="mb-4">{{judul}}</h1>
         </div>
+        <div class="col-md-12 text-center">
+          <h5 class="mb-4">{{isbn}}</h5>
+        </div>
       </div>
       <div class="row">
-        <div class="col-md-5 offset-md-1"><a class="btn btn-outline-primary btn-block" href="#">ISBN</a></div>
+        <div class="col-md-5 offset-md-1"><a class="btn btn-outline-primary btn-block" href="#">Pengarang</a></div>
         <div class="col-md-6"><a class="btn btn-outline-primary btn-block" href="#">Penerbit</a></div>
       </div>
       <div class="row">
         <div class="col-md-5 p-3 offset-md-1" style="">
-          <p class="text-center">{{isbn}}</p>
+          <p class="text-center">{{pengarang}}</p>
         </div>
         <div class="col-md-6 p-3" style="">
           <p class="text-center">{{penerbit}}</p>
@@ -76,6 +78,13 @@
               <b>Review dan Rating</b></div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-0" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col offset-md-1" style=""><a class="btn btn-primary btn-block btn-lg" href={{"/handlePeminjaman/?isbn="+isbn_parameter}} >Pinjam Buku</a></div>
       </div>
     </div>
   </div>

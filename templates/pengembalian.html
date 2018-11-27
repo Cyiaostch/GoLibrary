@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.1.3.css">
-  <link rel="stylesheet" href="../static/css/theme.css" type="text/css">  
+  <link rel="stylesheet" href="../static/css/theme.css" type="text/css">
 </head>
 
 <body>
   <nav class="navbar navbar-expand-md navbar-light sticky-top bg-light">
-    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar3">
+    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar6">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbar6"> <a class="navbar-brand text-primary d-none d-md-block" href="/home/">
@@ -20,7 +20,7 @@
         </a>
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"> <a class="nav-link" href="/pengembalian/">Pengembalian</a> </li>
-          <li class="nav-item shadow-none"> <a class="nav-link" href="/about/">About</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="/about/">About</a> </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/">Log Out</a> </li>
@@ -28,40 +28,27 @@
       </div>
     </div>
   </nav>
-  <div class="text-center my-1 mt-0 pt-4">
+  <div class="py-5 text-center">
     <div class="container">
       <div class="row">
-        <div class="mx-auto col-lg-6">
-          <h1>Search Result</h1>
-          <p class="mb-4">Yet I feel that I never was a greater artist than now. When, while the lovely valley teems with vapour around me, and the meridian sun strikes.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="my-1 py-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-10 offset-md-1" style="">
-          <div class="list-group">
-            
-            {% for item in data %}  
-				<a href={{'http://127.0.0.1:5000/halamanBuku/?isbn='+"%20".join(item[0].split(" "))}} class="list-group-item list-group-item-action flex-column align-items-start">
-					<div class="d-flex w-100 justify-content-between">
-						<h5 class="mb-1">{{item[1]}}</h5>
-					</div>
-					<p class="mb-1">{{item[5]}}</p> 
-					<small class="text-muted">{{item[6]}}</small>
-				</a>
-            {% endfor %}
-            
-          </div>
+        <div class="mx-auto col-lg-6 col-10">
+          <h1>Pengembalian</h1>
+          <p class="mb-3">Silahkan isi informasi di bawah ini</p>
+          <form class="text-left" action="/handlePengembalian/" method="get">
+            <div class="form-group"> <label for="form16">ISBN</label> <input name="isbn" type="text" class="form-control" id="form16"> </div>
+            <label for="form17" style="">Username</label>
+            <div class="form-group">
+              <div class="form-group"><input name="username" type="text" class="form-control" id="form17"></div>
+            </div>
+            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#konf_kembali">Kembalikan</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous" style=""></script>
 </body>
 
 </html>
