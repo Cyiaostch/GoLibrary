@@ -7,10 +7,6 @@ import sqlite3
 
 app = Flask(__name__)
 
-connection = sqlite3.connect('golibrary.db')
-
-cursor = connection.cursor()
-
 session = dict()
 session['user']=str()
 
@@ -24,6 +20,9 @@ def login():
 #ausdfiasdf
 @app.route('/handleLogin/')
 def handleLogin():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+	
 	username =  request.args.get('username')
 	password = request.args.get('password')
 	
@@ -32,6 +31,7 @@ def handleLogin():
 	result=cursor.fetchall()
 	
 	if(len(result)==0):
+		connection.close()
 		return render_template("login.html")
 	else:
 		session['user']=username
@@ -42,7 +42,8 @@ def handleLogin():
 		cursor.execute("""SELECT buku.judul, temp.Nomor_Antrian FROM Buku INNER JOIN (SELECT * FROM User INNER JOIN Antrian on User.Username=Antrian.Username WHERE User.Username='{}') as temp ON buku.ISBN=temp.ISBN;""".format(session["user"]))
 		result_2=cursor.fetchall()
 		result_2=[[value[0],"Antrian "+str(value[1]),"Mengantri"] for value in result_2]
-				
+		
+		connection.close()
 		return render_template("homepage.html",data=result,data_2=result_2)
 
 #Register
@@ -52,6 +53,9 @@ def register():
 
 @app.route('/handleRegister/')
 def handleRegister():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+
 	username =  request.args.get('username')
 	password = request.args.get('password')
 	nama = request.args.get('nama')
@@ -64,11 +68,15 @@ def handleRegister():
 	except sqlite3.IntegrityError:
 		pass
 	
+	connection.close()
 	return render_template("register.html") 
 
 #Homepage
 @app.route('/home/')
 def homepage():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+	
 	cursor.execute("""SELECT buku.judul, temp.Tanggal_pengembalian  FROM buku INNER JOIN (SELECT * FROM user INNER JOIN meminjam on user.Username=meminjam.Username WHERE user.Username='{}') as temp ON buku.ISBN=temp.ISBN;""".format(session["user"]))
 	result=cursor.fetchall()
 	result=[[value[0],value[1][:10],"Sedang Meminjam"] for value in result]
@@ -77,7 +85,7 @@ def homepage():
 	result_2=cursor.fetchall()
 	result_2=[[value[0],"Antrian "+ str(value[1]),"Mengantri"] for value in result_2]
 				
-	
+	connection.close()
 	return render_template("homepage.html",data=result, data_2=result_2)
 
 #Logout
@@ -88,16 +96,23 @@ def logout():
 #Search
 @app.route('/searchResult/')
 def searchResult():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+	
 	query =  request.args.get('query')
 		
 	cursor.execute("""SELECT * FROM buku WHERE Judul LIKE '%{}%'""".format(query))
 	result=cursor.fetchall()
 	
 	#isbn, judul, pengarang, penerbit, lokasiBuku, genre, tahunTerbit, review, rating
+	connection.close()
 	return render_template("search_result.html",data=result)
 
 @app.route('/halamanBuku/')
 def halamanBuku():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+
 	isbn =  request.args.get('isbn')
 	cursor.execute("""SELECT * FROM buku WHERE ISBN LIKE '%{}%'""".format(isbn))
 	data=cursor.fetchall()[0]
@@ -112,12 +127,18 @@ def halamanBuku():
 	stok = data[9]
 
 	if(stok==0):
+		connection.close()
 		return render_template("halaman_buku_kosong.html",judul=judul,isbn=isbn,genre=genre,pengarang=pengarang,tahun=tahun,penerbit=penerbit,review=review,rating=rating,isbn_parameter=isbn,stok=stok)
 	else:
+		connection.close()
 		return render_template("halaman_buku.html",judul=judul,isbn=isbn,genre=genre,pengarang=pengarang,tahun=tahun,penerbit=penerbit,review=review,rating=rating,isbn_parameter=isbn,stok=stok)
+
 #Peminjaman
 @app.route('/handlePeminjaman/')
 def handlePeminjaman():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+
 	isbn =  request.args.get('isbn')
 	cursor.execute("""SELECT * FROM buku WHERE ISBN LIKE '%{}%'""".format(isbn))
 	data=cursor.fetchall()[0]
@@ -142,12 +163,17 @@ def handlePeminjaman():
 	stok = data[9]
 	
 	if(stok==0):
+		connection.close()
 		return render_template("halaman_buku_kosong.html",judul=judul,isbn=isbn,genre=genre,pengarang=pengarang,tahun=tahun,penerbit=penerbit,review=review,rating=rating,isbn_parameter=isbn,stok=stok)
 	else:
+		connection.close()
 		return render_template("halaman_buku.html",judul=judul,isbn=isbn,genre=genre,pengarang=pengarang,tahun=tahun,penerbit=penerbit,review=review,rating=rating,isbn_parameter=isbn,stok=stok)
 #Antrian
 @app.route('/handleAntrian/')
 def handleAntrian():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+
 	isbn =  request.args.get('isbn')
 	cursor.execute("""SELECT * FROM Antrian WHERE ISBN LIKE '%{}%'""".format(isbn))
 	data=cursor.fetchall()
@@ -169,8 +195,10 @@ def handleAntrian():
 	stok = data[9]
 
 	if(stok==0):
+		connection.close()
 		return render_template("halaman_buku_kosong.html",judul=judul,isbn=isbn,genre=genre,pengarang=pengarang,tahun=tahun,penerbit=penerbit,review=review,rating=rating,isbn_parameter=isbn,stok=stok)
 	else:
+		connection.close()
 		return render_template("halaman_buku.html",judul=judul,isbn=isbn,genre=genre,pengarang=pengarang,tahun=tahun,penerbit=penerbit,review=review,rating=rating,isbn_parameter=isbn,stok=stok)
 
 #-------------------------------ADMIN-----------------------------------
@@ -181,6 +209,9 @@ def admin_login():
 
 @app.route('/admin/handleLogin/')
 def admin_handleLogin():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+
 	username =  request.args.get('username')
 	password = request.args.get('password')
 	
@@ -188,8 +219,10 @@ def admin_handleLogin():
 	result=cursor.fetchall()
 	
 	if(len(result)==0):
+		connection.close()
 		return render_template("admin_login.html")
 	else:
+		connection.close()
 		return render_template("admin_homepage.html")
 
 #Homepage
@@ -209,6 +242,9 @@ def inputBookData():
 
 @app.route('/admin/handleInputBookData/')
 def handleinputBookData():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+
 	isbn =  request.args.get('isbn')
 	judul = request.args.get('judul')
 	pengarang = request.args.get('pengarang')
@@ -227,23 +263,31 @@ def handleinputBookData():
 	except sqlite3.IntegrityError:
 		pass
 		
+	connection.close()
 	return render_template("admin_input_book_data.html")
 
 
 #Search
 @app.route('/admin/searchResult/')
 def admin_searchResult():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+
 	query =  request.args.get('query')
 		
 	cursor.execute("""SELECT * FROM buku WHERE Judul LIKE '%{}%'""".format(query))
 	result=cursor.fetchall()
 	
 	#isbn, judul, pengarang, penerbit, lokasiBuku, genre, tahunTerbit, review, rating
+	connection.close()
 	return render_template("admin_search_result.html",data=result)
 
 	
 @app.route('/admin/halamanBuku/')
 def admin_halamanBuku():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+
 	isbn =  request.args.get('isbn')
 	cursor.execute("""SELECT * FROM buku WHERE ISBN LIKE '%{}%'""".format(isbn))
 	data=cursor.fetchall()[0]
@@ -256,7 +300,8 @@ def admin_halamanBuku():
 	review =  data[7]
 	rating =  data[8]
 	stok = data[9]
-
+	
+	connection.close()
 	return render_template("admin_halaman_buku.html",judul=judul,isbn=isbn,genre=genre,pengarang=pengarang,tahun=tahun,penerbit=penerbit,review=review,rating=rating,isbn_parameter=isbn,stok=stok)
 
 #Pengembalian
@@ -266,6 +311,9 @@ def pengembalian():
 
 @app.route('/handlePengembalian/')
 def handlePengembalian():
+	connection = sqlite3.connect('golibrary.db')
+	cursor = connection.cursor()
+
 	isbn =  request.args.get('isbn')
 	username =  request.args.get('username')
 	
@@ -294,8 +342,7 @@ def handlePengembalian():
 		cursor.execute('''INSERT INTO meminjam VALUES ("{}","{}","{}")'''.format(isbn,result[0][1],datetime.datetime.now()+timedelta(days=7)))
 		connection.commit()
 	
-	
-	
+	connection.close()
 	return render_template("admin_pengembalian.html")
 #-----------------------------------------------------------------------
 
