@@ -7,21 +7,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.1.3.css">
   <link rel="stylesheet" href="../static/css/theme.css" type="text/css">
-
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-md navbar-light bg-light" style="">
-    <div class="container justify-content-center"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar6">
+  <nav class="navbar navbar-expand-md navbar-light sticky-top bg-light">
+    <div class="container"> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar3">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse text-center justify-content-center" id="navbar3">
+      <div class="collapse navbar-collapse" id="navbar6"> <a class="navbar-brand text-primary d-none d-md-block" href="/home/">
+          <i class="fa d-inline fa-lg fa-circle"></i>
+          <b>Go Library</b>
+        </a>
+        <ul class="navbar-nav mx-auto">
+        </ul>
         <ul class="navbar-nav">
-          <li class="nav-item mx-2"> <a class="nav-link" href="/admin/">Log out</a> </li>
-          <li class="nav-item mx-2"> <a class="nav-link navbar-brand mr-0 text-primary" href="/admin/home/"><i class="fa d-inline fa-lg fa-stop-circle-o"></i>
-              <b> BRAND</b></a> </li>
-          <li class="nav-item mx-2"> <a class="nav-link" href="/inputBookData/">Input Buku</a> </li>
-          <li class="nav-item mx-2"> <a class="nav-link" href="/adminPengembalian/">Pengembalian</a> </li>
+          <li class="nav-item"> <a class="nav-link text-primary" href="/">Log Out</a> </li>
         </ul>
       </div>
     </div>
@@ -76,6 +76,13 @@
               <b>Review dan Rating</b></div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-0" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col offset-md-1" style=""><a class="btn btn-primary btn-block btn-lg" href={{"/handleAntrian/?isbn="+isbn_parameter}} >Antri</a></div>
       </div>
     </div>
   </div>

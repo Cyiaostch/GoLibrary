@@ -31,7 +31,9 @@ cursor.execute('''CREATE TABLE buku (
   PRIMARY KEY (ISBN)
 );''')
 
-cursor.execute('''INSERT INTO buku VALUES ("19481234","The Return of The King","Tolkien","Toko Buku","1","Fantasy","2004","-","-",5)''')
+cursor.execute('''INSERT INTO buku VALUES ("112221","The Return of The King","Tolkien","Toko Buku","1","Fantasy","2004","-","-",5)''')
+cursor.execute('''INSERT INTO buku VALUES ("331113","The Two Towers","Tolkien","Toko Buku","1","Fantasy","2002","-","-",1)''')
+cursor.execute('''INSERT INTO buku VALUES ("223332","The Fellowship of The Ring","Tolkien","Toko Buku","1","Fantasy","2000","-","-",3)''')
 connection.commit()
 
 cursor.execute('''CREATE TABLE copy_buku (
@@ -43,7 +45,7 @@ cursor.execute('''CREATE TABLE copy_buku (
 cursor.execute('''CREATE TABLE meminjam (
   ISBN varchar(20) NOT NULL,
   Username varchar(35) NOT NULL,
-  Tanggal_peminjaman date NOT NULL,
+  Tanggal_pengembalian date NOT NULL,
   PRIMARY KEY (ISBN,Username)
 );''')
 
@@ -73,6 +75,12 @@ cursor.execute('''CREATE TABLE user (
 );''')
 
 cursor.execute('''INSERT INTO user VALUES ("deryan","deryan","ITB","Deryan","New York, 1 Januari 1998")''')
+cursor.execute('''INSERT INTO user VALUES ("athur","athur","ITB","Athur","New York, 2 Januari 1998")''')
+cursor.execute('''INSERT INTO user VALUES ("varrel","varrel","ITB","Varrel","New York, 3 Januari 1998")''')
+cursor.execute('''INSERT INTO user VALUES ("aisyah","aisyah","ITB","Aisyah","New York, 4 Januari 1998")''')
+cursor.execute('''INSERT INTO user VALUES ("ambar","ambar","ITB","Ambar","New York, 5 Januari 1998")''')
+cursor.execute('''INSERT INTO user VALUES ("roy","roy","ITB","Roy","New York, 6 Januari 1998")''')
+
 connection.commit()
 
 #commit command

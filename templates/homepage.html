@@ -18,8 +18,6 @@
           <b>Go Library</b>
         </a>
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item"> <a class="nav-link" href="/pengembalian/">Pengembalian</a> </li>
-          <li class="nav-item"> <a class="nav-link" href="/about/">About</a> </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item"> <a class="nav-link text-primary" href="/">Log Out</a> </li>
@@ -31,7 +29,7 @@
     <div class="container">
     </div>
   </div>
-  <div class="py-0 text-center">
+  <div class="py-1 text-center">
     <div class="container">
       <div class="row">
         <div class="mx-auto col-lg-6">
@@ -45,6 +43,39 @@
             </div>
           </form>
           <p class="small">We'll never share it with anyone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-1 py-3" >
+    <div class="container">
+      <div class="row">
+		<div class="mx-auto col-lg-6 text-center">
+		<h2>Buku yang dipinjam</h2>
+		</div>
+        <div class="col-md-10 offset-md-1" style="">
+          <div class="list-group">  
+			  
+			{% for item in data %}  
+				<a class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">{{item[0]}}</h5>
+					</div>
+					<p class="mb-1">{{item[1]}}</p> 
+					<small class="text-muted">{{item[2]}}</small>
+				</a>
+            {% endfor %}
+
+			{% for item in data_2 %}  
+				<a class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">{{item[0]}}</h5>
+					</div>
+					<p class="mb-1">{{item[1]}}</p> 
+					<small class="text-muted">{{item[2]}}</small>
+				</a>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
