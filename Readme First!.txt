@@ -22,7 +22,7 @@ Dependencies :
 
 Modules Installation :
 	
-Command : "pip install flask datetime pandas numpy sqlite3 pprint"
+Command : "pip install flask datetime pandas numpy pprint"
 
 
 
